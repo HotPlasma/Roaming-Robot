@@ -8,6 +8,8 @@
 #include "timer.h"
 #include "resource.h"
 
+
+
 bool exiting = false;
 long windowWidth = 1024;
 long windowHeight = 768;

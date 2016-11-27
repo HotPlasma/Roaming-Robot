@@ -1,1 +1,1 @@
-N Plane       | O models/Plane.obj                | T images/floor.bmp   | Tr 0 0 0      | R 0 0 0    | S 1 1 1 | M 1 E
+N Plane       | O assets/models/learjet.obj                | T assets/textures/learjet.bmp   | Tr 10 0 -30    | R 0 0 0    | S 1 1 1 | M 1 E

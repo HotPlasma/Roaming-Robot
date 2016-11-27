@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#include "CGfxOpenGL.h"
+
 // shader.h included these
 #include <stdio.h>
 #include <string>
@@ -18,7 +20,7 @@
 
 #include <windows.h>
 
-#include "CGfxOpenGL.h"
+
 
 #include <gl/gl.h>
 #include <gl/glu.h>

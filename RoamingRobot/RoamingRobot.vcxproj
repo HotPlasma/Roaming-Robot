@@ -135,6 +135,7 @@
     <ClCompile Include="src\ModelReader.cpp" />
     <ClCompile Include="src\Robot.cpp" />
     <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\TextureLoader.cpp" />
     <ClCompile Include="src\winmain.cpp" />
   </ItemGroup>

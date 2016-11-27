@@ -7,6 +7,10 @@
 #include <math.h>
 #include "CGfxOpenGL.h"
 #include "Robot.h"
+#include "TextureLoader.h"
+#include "ModelReader.h"
+#include "Model.h"
+#include "Scene.h"
 
 // disable implicit float-double casting
 #pragma warning(disable:4305)
@@ -22,6 +26,7 @@ CGfxOpenGL::~CGfxOpenGL()
 bool CGfxOpenGL::Init()
 {	
 	theRobot = new Robot;
+	theScene = new Scene("assets/scenes/Room.txt");
 
 	_fRotationAngle = 0.0f;
 
@@ -84,6 +89,9 @@ void CGfxOpenGL::SetupProjection(int width, int height)
 
 	m_windowWidth = width;
 	m_windowHeight = height;
+
+	
+	
 }
 
 void CGfxOpenGL::Prepare(float dt)
@@ -103,10 +111,24 @@ void CGfxOpenGL::Render()
 	// load the identity matrix (clear to default position and orientation)
 	glLoadIdentity();
 
+	for (int i = 0; i < theScene->ModelList.size(); i++)
+	{
+		glPushMatrix();
+		glLoadIdentity();
+		glColor3f(1.f, 1.f, 1.f);
+		//glTranslatef(0.0f, 0.0f, -30.0f);
+		theScene->ModelList[i].DrawModel(true, true);
+		glPopMatrix();
+	}
+
 	glPushMatrix();							// put current matrix on stack
 		glLoadIdentity();					// reset matrix
 		glTranslatef(0.0f, 0.0f, -30.0f);	// move to (0, 0, -30)
 		glRotatef(_fRotationAngle, 0.0f, 1.0f, 0.0f);	// rotate the robot on its y-axis
 		theRobot->DrawRobot(0.0f, 0.0f, 0.0f);		// draw the robot
-	glPopMatrix();		
+	glPopMatrix();
+
+
+
+
 }

@@ -1,13 +1,2 @@
-﻿  winmain.cpp
-  TextureLoader.cpp
-  Scene.cpp
-src\Scene.cpp(94): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-src\Scene.cpp(101): warning C4018: '<': signed/unsigned mismatch
-  ModelReader.cpp
-  Model.cpp
-  Generating Code...
-  Compiling...
-  CGfxOpenGL.cpp
-  Generating Code...
-  RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.exe
+﻿  RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.exe
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.pdb (Partial PDB)
