@@ -12,26 +12,22 @@ TextureLoader::~TextureLoader(void)
 }
 
 
-// Original code from
-//
-// http://www.cplusplus.com/articles/GwvU7k9E/
-//
-//
-// this loads and binds the texture to a given open gl identifier
+
+// Loads and binds the texture to a given open gl identifier
 int TextureLoader::LoadBMP(string location, GLuint &texture, bool repeatTexture)  //const char* location
 {
-	// this is a version using c++ file i/o rather than c.
+	// C++ file i/o rather than c.
 	unsigned char* datBuff[2] = {nullptr, nullptr}; // Header buffers
 
 	unsigned char* pixels = nullptr; // Pixels
 
-	// windows knows the relevant header structures
+	// Get relevant header structures
 	BITMAPFILEHEADER* bmpHeader = nullptr; // Header
 	BITMAPINFOHEADER* bmpInfo   = nullptr; // Info
 
-	// The file... We open it with it's constructor
+	// Open file
 	std::ifstream file(location, std::ios::binary);
-	if(!file)
+	if(!file) // If file not opened
 	{
 		std::cout << "Failure to open bitmap file.\n";
 		return 1;
@@ -69,9 +65,7 @@ int TextureLoader::LoadBMP(string location, GLuint &texture, bool repeatTexture)
 
 	unsigned int imageSize = bmpInfo->biSizeImage;
 
-	// we have a problem here - if the image size is not a multiple of 3 then
-	// attempting to patch the pixels in a simplee loop will overflow the buffer
-	
+	// Image size must be a multiple of 3	
 	unsigned int numberOfPixels = imageSize / 3;
 
 	if (imageSize == 0)
@@ -91,9 +85,8 @@ int TextureLoader::LoadBMP(string location, GLuint &texture, bool repeatTexture)
 	file.seekg(bmpHeader->bfOffBits);
 	file.read((char*)pixels, imageSize);
 	
-	// We're almost done. We have our image loaded, however it's not in the right format.
-	// .bmp files store image data in the BGR format, and we have to convert it to RGB.
-	// Since we have the value in bytes, this shouldn't be to hard to accomplish
+
+	// Image loaded now ready to be converted from the .bmp BGR format to RGB.
 
 	unsigned char tmpRGB = 0; // Swap buffer
 	for (unsigned long i = 0; i < (3 * numberOfPixels); i += 3)
@@ -121,7 +114,7 @@ int TextureLoader::LoadBMP(string location, GLuint &texture, bool repeatTexture)
 	// pixel data to create it.
 	glTexImage2D(GL_TEXTURE_2D, 0, mode, w, h, 0, mode, GL_UNSIGNED_BYTE, pixels);
 
-	// do we clamp the textures??
+	// If texture should be tiled(repeated) or not
 	if (repeatTexture == false)
 	{
 		// -----------------------------------------------------------

@@ -1,1 +1,2 @@
-N Plane       | O assets/models/learjet.obj                | T assets/textures/learjet.bmp   | Tr 10 0 -30    | R 0 0 0    | S 1 1 1 | M 1 E
+N Plane       | O assets/models/Ground.obj                | T assets/textures/floor.bmp   | Tr 0 -12 -40   | R 0 0 0    | S 1 1 1 | M 1 E
+N Deer        | O assets/models/Deer.obj                  | T assets/textures/deer.bmp   | Tr 10 -12 -40   | R 0 0 0    | S 1 1 1 | M 1 E
