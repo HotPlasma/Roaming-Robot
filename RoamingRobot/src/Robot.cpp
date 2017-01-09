@@ -1,5 +1,5 @@
 #ifdef _WINDOWS
-#include <windows.h>m_rotation
+#include <windows.h>
 #endif
 
 #include <gl/gl.h>
@@ -26,6 +26,8 @@ Robot::Robot()
 
 	_fArmsRotation = 20;
 	_fLegRotation = 20;
+	Moving = false;
+	ToggleAllMovement();
 }
 
 Robot::~Robot()
@@ -162,10 +164,22 @@ void Robot::ToggleAllMovement()
 
 void Robot::MoveForward(float distance) // Allows movement robot
 {
+	if (Moving == false)
+	{
+		ToggleAllMovement();
+		Moving = true;
+	}
+
 	glm::vec3 forwardNormal = glm::vec3(cosf(glm::radians(_fRotationAngle - 90)), 0, -sinf(glm::radians(_fRotationAngle - 90))); // Normal discribing direction Robot is facing and direction of travel
 
 	_RobotPosition.x -= distance * forwardNormal.x;
 	_RobotPosition.z -= distance * forwardNormal.z;
+
+}
+
+glm::vec3 Robot::ReturnRobotPosition()
+{
+	return _RobotPosition;
 }
 
 void Robot::DrawRobot(float xPos, float yPos, float zPos)

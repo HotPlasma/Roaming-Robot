@@ -91,16 +91,21 @@ void Model::LoadModel(string Model)
 
 void Model::DrawModel(bool drawWithNormals, bool drawWithTexture)
 {
+
+	// Translates model 
+	glTranslatef(ModelPosition.x, ModelPosition.y, ModelPosition.z);
+
 	// Performs rotation of model
 	glRotatef(ModelRotation.x, 1, 0, 0);
 	glRotatef(ModelRotation.y, 0, 1, 0);
 	glRotatef(ModelRotation.z, 0, 0, 1);
 
 	// Scales model if necessary 
-	glScalef(ModelScale.x,ModelScale.y,ModelScale.z);
+	glScalef(ModelScale.x, ModelScale.y, ModelScale.z);
+	
 
-	// Translates model 
-	glTranslatef(ModelPosition.x, ModelPosition.y, ModelPosition.z);
+
+
 
 	// activate and specify pointer to vertex array
 

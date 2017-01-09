@@ -13,8 +13,10 @@
 bool exiting = false;
 long windowWidth = 1024;
 long windowHeight = 768;
+unsigned int CameraID = 1;
 long windowBits = 32;
 bool fullscreen = false;
+bool walking = false;
 HDC hDC;
 
 CGfxOpenGL *g_glRender = NULL;
@@ -101,7 +103,7 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		height = HIWORD(lParam);		// retrieve width and height
 		width = LOWORD(lParam);
 
-		g_glRender->SetupProjection(width, height);
+		g_glRender->SetupProjection(width, height, false);
 
 		break;
 
@@ -115,9 +117,25 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		break;
 
 	case WM_LBUTTONDOWN:		// left mouse button
+		if (CameraID == 3)
+		{
+			CameraID = 1;
+		}
+		else
+		{
+			CameraID++;
+		}
 		break;
 
 	case WM_RBUTTONDOWN:		// right mouse button
+		if (CameraID == 1)
+		{
+			CameraID = 3;
+		}
+		else
+		{
+			CameraID--;
+		}
 		break;
 
 	case WM_MOUSEMOVE:			// mouse movement
@@ -131,6 +149,21 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		break;
 
 	case WM_KEYUP:
+	
+		int kuKeys;
+		LPARAM kukeyData;
+		kuKeys = (int)wParam;    // virtual-key code 
+		kukeyData = lParam;          // key data 
+
+		switch (kuKeys)
+		{
+		case VK_UP:
+			g_glRender->ReturnRobot()->ToggleAllMovement();
+			g_glRender->ReturnRobot()->Moving = false;
+			break;
+		}
+
+		//g_glRender->ReturnRobot()->ToggleAllMovement();
 		break;
 
 
@@ -149,12 +182,13 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 			//  Pause arm movement
 		case VK_SPACE:
-			g_glRender->ReturnRobot()->ToggleArmsMovement();
+			g_glRender->ReturnRobot()->ToggleAllMovement();
 			
 			break;
 
 			//Proccess keys relating to movement
 		default:
+			//g_glRender->ReturnRobot()->ToggleAllMovement();
 			g_glRender->ProcessInput(fwKeys);
 		}
 
@@ -232,6 +266,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		g_glRender->Prepare(g_hiResTimer->GetElapsedSeconds(1));
 		g_glRender->Render();
 		SwapBuffers(hDC);
+
+		if (CameraID == 1)
+		{
+			g_glRender->ChangeCamera(glm::vec3(10, 10, 10));
+		}
+		else if (CameraID == 2)
+		{
+			g_glRender->ChangeCamera(glm::vec3(-10, 10, -10));
+		}
+
+		else if (CameraID == 3)
+		{
+			g_glRender->ChangeCamera(glm::vec3(-30, 10, 30));
+		}
 
 		while (PeekMessage (&msg, NULL, 0, 0, PM_NOREMOVE))
 		{

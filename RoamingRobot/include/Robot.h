@@ -49,6 +49,8 @@ public:
 	void MoveForward(float distance);
 	void ToggleArmsMovement();
 	void ToggleAllMovement();
+	glm::vec3 ReturnRobotPosition();
+	bool Moving;
 	// updates the robot data
 	void Prepare(float dt);
 };

@@ -17,6 +17,7 @@
 
 CGfxOpenGL::CGfxOpenGL()
 {
+	CameraPos = glm::vec3(1, 1, 1);
 }
 
 CGfxOpenGL::~CGfxOpenGL()
@@ -62,13 +63,20 @@ void CGfxOpenGL::ProcessInput(int input)
 		theRobot->_fRotationAngle += -2.5f;
 		break;
 	}
+
+	
 }
 
 Robot* CGfxOpenGL::ReturnRobot()
 {
 	return theRobot;
 }
-void CGfxOpenGL::SetupProjection(int width, int height)
+void CGfxOpenGL::ChangeCamera(glm::vec3 CameraPosition)
+{
+	CameraPos = glm::vec3(CameraPosition.x, CameraPosition.y, CameraPosition.z);
+}
+
+void CGfxOpenGL::SetupProjection(int width, int height, bool RobotReady)
 {
 	if (height == 0)					// don't want a divide by zero
 	{
@@ -81,7 +89,16 @@ void CGfxOpenGL::SetupProjection(int width, int height)
 
 	// calculate aspect ratio of window
 	gluPerspective(52.0f,(GLfloat)width/(GLfloat)height,1.0f,1000.0f);
-
+	
+	if (RobotReady)
+	{
+		gluLookAt(CameraPos.x, CameraPos.y, CameraPos.z, theRobot->ReturnRobotPosition().x, theRobot->ReturnRobotPosition().y , theRobot->ReturnRobotPosition().z, 0, 1, 0);
+	}
+	else
+	{
+		gluLookAt(10, 10, 10, 0, 0, 0, 0, 1, 0);
+	}
+	
 	//Scene Room("assets/scenes/Room.txt");
 
 	glMatrixMode(GL_MODELVIEW);				// set modelview matrix
@@ -101,6 +118,9 @@ void CGfxOpenGL::Prepare(float dt)
 	//	_fRotationAngle = 0.0f;
 
 	theRobot->Prepare(dt);
+	//CameraPos = glm::vec3(theRobot->ReturnRobotPosition().x, theRobot->ReturnRobotPosition().y + 5, theRobot->ReturnRobotPosition().z - 2);
+	SetupProjection(1024, 768, true);
+	//cout << CameraPos.x << " " << CameraPos.y << " " << CameraPos.z << endl;
 }
 
 void CGfxOpenGL::Render()
@@ -111,16 +131,18 @@ void CGfxOpenGL::Render()
 	// load the identity matrix (clear to default position and orientation)
 	glLoadIdentity();
 
+	// Draw Models
 	for (int i = 0; i < theScene->ModelList.size(); i++)
 	{
 		glPushMatrix();
 		glLoadIdentity();
 		glColor3f(1.f, 1.f, 1.f);
 		//glTranslatef(0.0f, 0.0f, -30.0f);
-		theScene->ModelList[i].DrawModel(true, true);
+		theScene->ModelList[i].DrawModel(false, true);
 		glPopMatrix();
 	}
 
+	// Draw Robot
 	glPushMatrix();							// put current matrix on stack
 		glLoadIdentity();					// reset matrix
 		glTranslatef(0.0f, 0.0f, -30.0f);	// move to (0, 0, -30)

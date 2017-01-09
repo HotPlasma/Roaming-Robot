@@ -7,6 +7,7 @@
 #define TWO_PI PI*2.0
 #define HALF_PI PI/2.0
 
+#include "../libraries/glm/glm/glm.hpp"
 
 class Robot;
 
@@ -16,6 +17,8 @@ class CGfxOpenGL
 {
 private:
 	float _fRotationAngle;
+
+	glm::vec3 CameraPos;
 
 	int m_windowWidth;
 	int m_windowHeight;
@@ -27,11 +30,11 @@ public:
 	virtual ~CGfxOpenGL();
 
 	
-
 	bool Init();
 	bool Shutdown();
 	Robot* ReturnRobot();
-	void SetupProjection(int width, int height);
+	void ChangeCamera(glm::vec3 CameraPosition);
+	void SetupProjection(int width, int height, bool RobotReady);
 	void ProcessInput(int input);
 
 	void Prepare(float dt);
