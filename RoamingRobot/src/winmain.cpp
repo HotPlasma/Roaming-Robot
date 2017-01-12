@@ -269,16 +269,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		if (CameraID == 1)
 		{
-			g_glRender->ChangeCamera(glm::vec3(10, 10, 10));
+			g_glRender->ChangeCamera(glm::vec3(1, 30, 100));
 		}
 		else if (CameraID == 2)
 		{
-			g_glRender->ChangeCamera(glm::vec3(-10, 10, -10));
+			g_glRender->ChangeCamera(glm::vec3(100, 30, -30));
 		}
 
 		else if (CameraID == 3)
 		{
-			g_glRender->ChangeCamera(glm::vec3(-30, 10, 30));
+			g_glRender->ChangeCamera(glm::vec3(-100, 30, 30));
 		}
 
 		while (PeekMessage (&msg, NULL, 0, 0, PM_NOREMOVE))

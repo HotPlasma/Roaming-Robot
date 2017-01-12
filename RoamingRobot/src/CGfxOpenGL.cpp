@@ -18,6 +18,7 @@
 CGfxOpenGL::CGfxOpenGL()
 {
 	CameraPos = glm::vec3(1, 1, 1);
+	CollectableSpeed = glm::vec3(0, 1, 0);
 }
 
 CGfxOpenGL::~CGfxOpenGL()
@@ -120,6 +121,32 @@ void CGfxOpenGL::Prepare(float dt)
 	theRobot->Prepare(dt);
 	//CameraPos = glm::vec3(theRobot->ReturnRobotPosition().x, theRobot->ReturnRobotPosition().y + 5, theRobot->ReturnRobotPosition().z - 2);
 	SetupProjection(1024, 768, true);
+	for (int i = 0; i < theScene->ModelList.size(); i++)
+	{
+		if (theScene->ModelList.at(i).CheckIfCollectable())
+		{
+			if (!theScene->ModelList.at(i).GetCollected())
+			{
+				if (theScene->ModelList.at(i).GetPosition().y > -7)
+				{
+					CollectableSpeed = glm::vec3(0, -0.03, 0);
+				}
+				else if (theScene->ModelList.at(i).GetPosition().y < -10)
+				{
+					CollectableSpeed = glm::vec3(0, 0.03, 0);
+				}
+				theScene->ModelList.at(i).SetPosition(theScene->ModelList.at(i).GetPosition() + CollectableSpeed);
+				theScene->ModelList.at(i).SetRotation(glm::vec3(45, theScene->ModelList.at(i).GetRotation().y + 1, theScene->ModelList.at(i).GetRotation().z));
+
+				glm::vec3 Distance = theRobot->ReturnRobotPosition() - theScene->ModelList.at(i).GetPosition();
+				float abc = sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f));
+				if (sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f)) < 5)
+				{
+					theScene->ModelList.at(i).SetCollected();
+				}
+			}
+		}
+	}
 	//cout << CameraPos.x << " " << CameraPos.y << " " << CameraPos.z << endl;
 }
 
@@ -134,18 +161,20 @@ void CGfxOpenGL::Render()
 	// Draw Models
 	for (int i = 0; i < theScene->ModelList.size(); i++)
 	{
-		glPushMatrix();
-		glLoadIdentity();
-		glColor3f(1.f, 1.f, 1.f);
-		//glTranslatef(0.0f, 0.0f, -30.0f);
-		theScene->ModelList[i].DrawModel(false, true);
-		glPopMatrix();
+		if (!theScene->ModelList.at(i).GetCollected())
+		{
+			glPushMatrix();
+			glLoadIdentity();
+			glColor3f(1.f, 1.f, 1.f);
+			theScene->ModelList[i].DrawModel(false, true);
+			glPopMatrix();
+		}
 	}
 
 	// Draw Robot
 	glPushMatrix();							// put current matrix on stack
 		glLoadIdentity();					// reset matrix
-		glTranslatef(0.0f, 0.0f, -30.0f);	// move to (0, 0, -30)
+		glTranslatef(0.0f, 0.0f, 0.0f);	// move to (0, 0, -30)
 		glRotatef(_fRotationAngle, 0.0f, 1.0f, 0.0f);	// rotate the robot on its y-axis
 		theRobot->DrawRobot(0.0f, 0.0f, 0.0f);		// draw the robot
 	glPopMatrix();

@@ -22,6 +22,9 @@ private:
 
 	int m_windowWidth;
 	int m_windowHeight;
+
+	glm::vec3 CollectableSpeed; // Speed at which a collectable bounces
+
 	Robot *theRobot;
 	Scene *theScene;
 

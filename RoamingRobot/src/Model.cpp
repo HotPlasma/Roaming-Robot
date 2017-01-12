@@ -42,6 +42,16 @@ glm::vec3 Model::GetScale()
 	return ModelScale;
 }
 
+bool Model::CheckIfCollectable()
+{
+	return m_bCollectable;
+}
+
+bool Model::GetCollected()
+{
+	return m_bCollected;
+}
+
 int Model::GetMaterial()
 {
 	return ModelMaterial;
@@ -74,6 +84,16 @@ void  Model::SetScale(glm::vec3 NewScale)
 	ModelScale = NewScale;
 }
 
+void Model::SetCollectable()
+{
+	m_bCollectable = true;
+}
+
+void Model::SetCollected()
+{
+	m_bCollected = true;
+}
+
 void Model::SetTexture(GLuint TextureID)
 {
 	m_textureID = TextureID;
@@ -94,10 +114,10 @@ void Model::DrawModel(bool drawWithNormals, bool drawWithTexture)
 
 	// Translates model 
 	glTranslatef(ModelPosition.x, ModelPosition.y, ModelPosition.z);
-
+	
 	// Performs rotation of model
-	glRotatef(ModelRotation.x, 1, 0, 0);
 	glRotatef(ModelRotation.y, 0, 1, 0);
+	glRotatef(ModelRotation.x, 1, 0, 0);
 	glRotatef(ModelRotation.z, 0, 0, 1);
 
 	// Scales model if necessary 

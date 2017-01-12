@@ -93,6 +93,11 @@ void Scene::ReadSceneFile(string filename)
 				iss >> data;
 				Temp.SetMaterial(stof(data));
 			}
+
+			else if (data == "C") // Assign material to model
+			{
+				Temp.SetCollectable();
+			}
 		}
 		ModelList.push_back(Temp); // Push back temp into list of models to be drawn
 	}
