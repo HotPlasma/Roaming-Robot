@@ -2,11 +2,12 @@
 #include <windows.h>
 #endif
 
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include "stdafx.h"
+//#include <gl/gl.h>
+//#include <gl/glu.h>
 
 #include "Robot.h"
-#include "resource.h"
+//#include "resource.h"
 
 
 Robot::Robot()

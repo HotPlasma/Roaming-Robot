@@ -2,8 +2,10 @@
 #include <windows.h>
 #endif
 
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include "stdafx.h"
+
+//#include <gl/gl.h>
+//#include <gl/glu.h>
 #include <math.h>
 #include "CGfxOpenGL.h"
 #include "Robot.h"
@@ -15,10 +17,14 @@
 // disable implicit float-double casting
 #pragma warning(disable:4305)
 
+GLfloat m_lightPosition[] = { -50.0f, +100.0f, +20.0f, 1.0f };
+
 CGfxOpenGL::CGfxOpenGL()
 {
 	CameraPos = glm::vec3(1, 1, 1);
 	CollectableSpeed = glm::vec3(0, 1, 0);
+	theRobot = new Robot;
+	theScene = new Scene("assets/scenes/Room.txt");
 }
 
 CGfxOpenGL::~CGfxOpenGL()
@@ -27,10 +33,12 @@ CGfxOpenGL::~CGfxOpenGL()
 
 bool CGfxOpenGL::Init()
 {	
-	theRobot = new Robot;
-	theScene = new Scene("assets/scenes/Room.txt");
+	//theRobot = new Robot;
+	
 
-	_fRotationAngle = 0.0f;
+	//ConfigureLightSources();
+
+	
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glEnable(GL_DEPTH_TEST);
@@ -68,6 +76,51 @@ void CGfxOpenGL::ProcessInput(int input)
 	
 }
 
+void CGfxOpenGL::SetMaterialDefault()
+{
+	GLfloat materialWhiteAmbient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	GLfloat materialWhiteDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	GLfloat materialWhiteSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };		// so keeps light colour
+	GLfloat materialWhiteShininess = 700.0f;
+	glShadeModel(GL_SMOOTH);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, materialWhiteAmbient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, materialWhiteDiffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, materialWhiteSpecular);
+	glMaterialf(GL_FRONT, GL_SHININESS, materialWhiteShininess);
+}
+
+void CGfxOpenGL::SetLightPosition(float x, float y, float z)
+{
+	m_lightPosition[0] = x;
+	m_lightPosition[1] = y;
+	m_lightPosition[2] = z;
+	glLightfv(GL_LIGHT0, GL_POSITION, m_lightPosition);
+}
+
+void CGfxOpenGL::ConfigureLightSources()
+{
+	GLfloat lightColour[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat noLight[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat lightModelAmbient[] = { 0.5f, 0.5f, 0.5f, 1.0 };
+
+	// put light behind and above us on left
+	SetLightPosition(-40.0f, +20, -23.0f);
+
+	glLightfv(GL_LIGHT0, GL_POSITION, m_lightPosition);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColour);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, lightColour);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, noLight);			// no ambient light from the source
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);	// use global ambient instead
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	// with lighting glColor no longer applies
+	// create a default material for the models
+	SetMaterialDefault();
+}
+
 Robot* CGfxOpenGL::ReturnRobot()
 {
 	return theRobot;
@@ -100,7 +153,6 @@ void CGfxOpenGL::SetupProjection(int width, int height, bool RobotReady)
 		gluLookAt(10, 10, 10, 0, 0, 0, 0, 1, 0);
 	}
 	
-	//Scene Room("assets/scenes/Room.txt");
 
 	glMatrixMode(GL_MODELVIEW);				// set modelview matrix
 	glLoadIdentity();						// reset modelview matrix
@@ -119,6 +171,8 @@ void CGfxOpenGL::Prepare(float dt)
 	//	_fRotationAngle = 0.0f;
 
 	theRobot->Prepare(dt);
+
+	SetLightPosition(-40 , 25 , 23);
 	//CameraPos = glm::vec3(theRobot->ReturnRobotPosition().x, theRobot->ReturnRobotPosition().y + 5, theRobot->ReturnRobotPosition().z - 2);
 	SetupProjection(1024, 768, true);
 	for (int i = 0; i < theScene->ModelList.size(); i++)

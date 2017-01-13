@@ -23,6 +23,8 @@ private:
 	int m_windowWidth;
 	int m_windowHeight;
 
+	
+
 	glm::vec3 CollectableSpeed; // Speed at which a collectable bounces
 
 	Robot *theRobot;
@@ -39,6 +41,11 @@ public:
 	void ChangeCamera(glm::vec3 CameraPosition);
 	void SetupProjection(int width, int height, bool RobotReady);
 	void ProcessInput(int input);
+
+	void SetMaterialDefault();
+
+	void SetLightPosition(float x, float y, float z);
+	void ConfigureLightSources(); // Sets up openGL light
 
 	void Prepare(float dt);
 	void Render();
