@@ -48,6 +48,9 @@
     <ClCompile Include="src\TextureVault.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\HUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\CGfxOpenGL.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -121,6 +121,11 @@ void CGfxOpenGL::ConfigureLightSources()
 	SetMaterialDefault();
 }
 
+int CGfxOpenGL::ReturnCollectableCount()
+{
+	return iBatteriesCollected;
+}
+
 Robot* CGfxOpenGL::ReturnRobot()
 {
 	return theRobot;
@@ -160,8 +165,6 @@ void CGfxOpenGL::SetupProjection(int width, int height, bool RobotReady)
 	m_windowWidth = width;
 	m_windowHeight = height;
 
-	
-	
 }
 
 void CGfxOpenGL::Prepare(float dt)
@@ -193,10 +196,11 @@ void CGfxOpenGL::Prepare(float dt)
 				theScene->ModelList.at(i).SetRotation(glm::vec3(45, theScene->ModelList.at(i).GetRotation().y + 1, theScene->ModelList.at(i).GetRotation().z));
 
 				glm::vec3 Distance = theRobot->ReturnRobotPosition() - theScene->ModelList.at(i).GetPosition();
-				float abc = sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f));
+
 				if (sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f)) < 5)
 				{
 					theScene->ModelList.at(i).SetCollected();
+					iBatteriesCollected++;
 				}
 			}
 		}

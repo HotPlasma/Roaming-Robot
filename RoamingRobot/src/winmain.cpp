@@ -6,6 +6,7 @@
 #include <MainMenu.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <HUD.h>
 
 //Menu variables
 #define CLOSE_GAME 1
@@ -30,6 +31,7 @@ int minorVersion = 3;
 
 CGfxOpenGL *g_glRender = NULL;
 Menu SelectionMenu(windowWidth,windowHeight);
+HUD HeadsUpDisplay(windowWidth, windowHeight);
 sf::Clock timerClock;
 
 int iState = MENU;
@@ -199,7 +201,8 @@ int main()
 					g_glRender->Render();
 					window.pushGLStates();
 					// Heads Up Display
-
+					HeadsUpDisplay.UpdateCollectableCount(g_glRender->ReturnCollectableCount());
+					window.draw(HeadsUpDisplay);
 					window.popGLStates();
 					timerClock.restart();
 				}

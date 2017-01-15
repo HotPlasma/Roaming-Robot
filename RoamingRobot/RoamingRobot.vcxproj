@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\HUD.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CGfxOpenGL.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CGfxOpenGL.h" />
+    <ClInclude Include="include\HUD.h" />
     <ClInclude Include="include\MainMenu.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelReader.h" />

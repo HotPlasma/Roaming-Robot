@@ -27,6 +27,8 @@ private:
 
 	glm::vec3 CollectableSpeed; // Speed at which a collectable bounces
 
+	unsigned int iBatteriesCollected = 0;
+
 	Robot *theRobot;
 	Scene *theScene;
 
@@ -46,6 +48,8 @@ public:
 
 	void SetLightPosition(float x, float y, float z);
 	void ConfigureLightSources(); // Sets up openGL light
+
+	int ReturnCollectableCount();
 
 	void Prepare(float dt);
 	void Render();

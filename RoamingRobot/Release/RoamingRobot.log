@@ -1,11 +1,10 @@
-﻿  CGfxOpenGL.cpp
-src\CGfxOpenGL.cpp(178): warning C4018: '<': signed/unsigned mismatch
-src\CGfxOpenGL.cpp(220): warning C4018: '<': signed/unsigned mismatch
-  Robot.cpp
+﻿  HUD.cpp
+include\HUD.cpp(10): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  winmain.cpp
   Generating code
-  3 of 695 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  2 of 716 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    28 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Release\RoamingRobot.exe
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Release\RoamingRobot.pdb (Full PDB)
