@@ -47,6 +47,7 @@ public:
 	// draws the entire robot
 	void DrawRobot(float xPos, float yPos, float zPos);
 	void MoveForward(float distance);
+	void SetMaterialDefault();
 	void ToggleArmsMovement();
 	void ToggleAllMovement();
 	glm::vec3 ReturnRobotPosition();

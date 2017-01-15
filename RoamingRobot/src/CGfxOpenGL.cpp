@@ -23,8 +23,7 @@ CGfxOpenGL::CGfxOpenGL()
 {
 	CameraPos = glm::vec3(1, 1, 1);
 	CollectableSpeed = glm::vec3(0, 1, 0);
-	theRobot = new Robot;
-	theScene = new Scene("assets/scenes/Room.txt");
+
 }
 
 CGfxOpenGL::~CGfxOpenGL()
@@ -36,9 +35,10 @@ bool CGfxOpenGL::Init()
 	//theRobot = new Robot;
 	
 
-	//ConfigureLightSources();
-
 	
+
+	theRobot = new Robot;
+	theScene = new Scene("assets/scenes/Room.txt");
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glEnable(GL_DEPTH_TEST);
@@ -212,6 +212,10 @@ void CGfxOpenGL::Render()
 	// load the identity matrix (clear to default position and orientation)
 	glLoadIdentity();
 
+
+	ConfigureLightSources();
+
+
 	// Draw Models
 	for (int i = 0; i < theScene->ModelList.size(); i++)
 	{
@@ -219,8 +223,8 @@ void CGfxOpenGL::Render()
 		{
 			glPushMatrix();
 			glLoadIdentity();
-			glColor3f(1.f, 1.f, 1.f);
-			theScene->ModelList[i].DrawModel(false, true);
+			//glColor3f(1.f, 1.f, 1.f);
+			theScene->ModelList[i].DrawModel(true, true);
 			glPopMatrix();
 		}
 	}
@@ -228,9 +232,14 @@ void CGfxOpenGL::Render()
 	// Draw Robot
 	glPushMatrix();							// put current matrix on stack
 		glLoadIdentity();					// reset matrix
-		glTranslatef(0.0f, 0.0f, 0.0f);	// move to (0, 0, -30)
+		glTranslatef(0.0f, 0.0f, 0.0f);	// move to (0, 0, 0)
 		glRotatef(_fRotationAngle, 0.0f, 1.0f, 0.0f);	// rotate the robot on its y-axis
+		glEnable(GL_COLOR_MATERIAL);
+		glDisable(GL_CULL_FACE);
 		theRobot->DrawRobot(0.0f, 0.0f, 0.0f);		// draw the robot
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_COLOR_MATERIAL);
+		glDisable(GL_COLOR_MATERIAL);
 	glPopMatrix();
 
 

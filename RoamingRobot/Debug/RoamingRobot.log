@@ -1,3 +1,7 @@
 ﻿  winmain.cpp
+  CGfxOpenGL.cpp
+src\CGfxOpenGL.cpp(178): warning C4018: '<': signed/unsigned mismatch
+src\CGfxOpenGL.cpp(216): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.exe
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.pdb (Partial PDB)

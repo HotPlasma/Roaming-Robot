@@ -178,6 +178,19 @@ void Robot::MoveForward(float distance) // Allows movement robot
 
 }
 
+void Robot::SetMaterialDefault()
+{
+	GLfloat materialWhiteAmbient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	GLfloat materialWhiteDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	GLfloat materialWhiteSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };		// so keeps light colour
+	GLfloat materialWhiteShininess = 700.0f;
+	glShadeModel(GL_SMOOTH);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, materialWhiteAmbient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, materialWhiteDiffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, materialWhiteSpecular);
+	glMaterialf(GL_FRONT, GL_SHININESS, materialWhiteShininess);
+}
+
 glm::vec3 Robot::ReturnRobotPosition()
 {
 	return _RobotPosition;
