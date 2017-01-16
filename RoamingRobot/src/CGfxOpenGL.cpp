@@ -38,7 +38,7 @@ bool CGfxOpenGL::Init()
 	
 
 	theRobot = new Robot;
-	theScene = new Scene("assets/scenes/Room.txt");
+	theScene = new Scene("assets/scenes/Room.cfg");
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glEnable(GL_DEPTH_TEST);
