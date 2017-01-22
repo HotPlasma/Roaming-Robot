@@ -1,2 +1,29 @@
-﻿  RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.exe
+﻿  main.cpp
+src\main.cpp(247): warning C4018: '>': signed/unsigned mismatch
+  TextureVault.cpp
+src\TextureVault.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  TextureLoader.cpp
+  stdafx.cpp
+  Scene.cpp
+src\Scene.cpp(110): warning C4018: '<': signed/unsigned mismatch
+  Robot.cpp
+  ModelReader.cpp
+  Model.cpp
+  Menu.cpp
+  MainMenu.cpp
+src\MainMenu.cpp(49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+src\MainMenu.cpp(51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  HUD.cpp
+src\HUD.cpp(12): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+src\HUD.cpp(28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  EndScreen.cpp
+  Game.cpp
+src\Game.cpp(175): warning C4018: '<': signed/unsigned mismatch
+src\Game.cpp(206): warning C4018: '<': signed/unsigned mismatch
+src\Game.cpp(225): warning C4018: '<': signed/unsigned mismatch
+  Button.cpp
+  tinyxml2.cpp
+  Generating Code...
+c:\users\egor\desktop\projects\uni projects\year 3\games programming\roamingrobot\roamingrobot\src\mainmenu.cpp(88): warning C4715: 'Menu::update': not all control paths return a value
+  RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.exe
   RoamingRobot.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\RoamingRobot\Debug\RoamingRobot.pdb (Partial PDB)

@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>./libraries/GLFW/glfw-3.0.4.bin.WIN32/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./libraries/GLFW/glfw-3.0.4.bin.WIN32/include;./libraries/tinyxml;./libraries/glm/glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>User32.lib;gdi32.lib;winmm.lib;glew32s.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -113,7 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./libraries/GLFW/glfw-3.0.4.bin.WIN32/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./libraries/GLFW/glfw-3.0.4.bin.WIN32/include;./libraries/tinyxml;./libraries/glm/glm;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libraries\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\EndScreen.cpp" />
@@ -166,12 +167,10 @@
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\TextureLoader.h" />
     <ClInclude Include="include\TextureVault.h" />
+    <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="assets\scenes\Room.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\scenes\Room.cfg" />
+    <Xml Include="assets\scenes\Room.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

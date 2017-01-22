@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 #include <iostream>
 #include <stdafx.h>
 #include <TextureVault.h>

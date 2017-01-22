@@ -1,14 +1,14 @@
-#include "..\include\EndScreen.h"
+#include <EndScreen.h>
 
 EndScreen::EndScreen(int WindowWidth, int WindowHeight)
 {
-	// Load in all textures needed for main menu
+	// Load in all textures needed for menu
 	m_TexLoader.setBaseDirectory("assets\\UI\\");
 	m_TexLoader.load(std::vector<std::string>{
 		"EndScreen.png"
 	});
 
-	// Set up main menu background
+	// Set up background
 	m_Background.setPosition(0, 0);
 	m_Background.setTexture(*m_TexLoader.getTextureIterator(0));
 }

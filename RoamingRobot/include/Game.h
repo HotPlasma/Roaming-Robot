@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////
+//
+// Roaming Robot - Created by Jegor Kharlamov
+// Created for Games Programming Year 3 Coursework at DMU - Games Programming Course
+//
+// This project is a collectathon made with personally developed game engine components
+//
+////////////////////////////////////////////////////////////
+
 #ifndef __GL_COMPONENT
 #define __GL_COMPONENT
 

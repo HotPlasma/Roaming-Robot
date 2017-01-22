@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 
+
 Scene::Scene(string filename)
 {
 	ReadSceneFile(filename); // Send file to be read
@@ -11,97 +12,100 @@ void Scene::ReadSceneFile(string filename)
 {
 
 	Model Temp; // Temperary model to be pushed into Scene Vector
+	string sData; // Current sData being read
+	
 
+	tinyxml2::XMLDocument doc; // XML document
+	
+	doc.LoadFile(filename.c_str()); // Load document
 
-	std::fstream sceneFile(filename, std::ios_base::in);
-
-	if (!sceneFile.is_open()) // If file not open
+	for (tinyxml2::XMLNode* iNode = doc.FirstChild(); iNode != NULL; iNode = iNode->NextSibling())
 	{
-		std::cerr << "File " << filename << " not found."; // Return an error
-		DebugBreak();
-		throw std::invalid_argument("File not found");
-		return;	//ERROR!!!
-	}
-
-	string line; // Line being read
-	string data; // Current data being read
-
-	while (getline(sceneFile, line))
-	{
-		istringstream iss(line);
-		data = "";
-		while(data != "E") // While its not the end of the line
+		if (strcmp(iNode->Value(), "Scene") == 0) // For each scene
 		{
-			iss >> data; // Read next bit of data
-
-			if (data == "O") // Have reached .obj file location
+			for (tinyxml2::XMLNode* iNode2 = iNode->FirstChild(); iNode2 != NULL; iNode2 = iNode2->NextSibling())
 			{
-				iss >> data;
-				Temp.SetFileLocation(data); // Set temp to .obj location
-			}
-			else if(data == "T") // Have reached texture location
-			{
-				//Load texture into texture vector
-				iss >> data; 
-				m_textureID.resize(m_textureID.size() + 1); // Make the textureID vector 1 bigger
-				// Set texture to end of vector
-				tl->LoadBMP(data, m_textureID[m_textureID.size() - 1], true); 
-				Temp.SetTexture(m_textureID[m_textureID.size() - 1]); 
-			}
+				if (strcmp(iNode2->Value(), "Object") == 0) // For each object within a scene
+				{
+					for (tinyxml2::XMLNode* iNode3 = iNode2->FirstChild(); iNode3 != NULL; iNode3 = iNode3->NextSibling())
+					{
+						istringstream iss(iNode3->ToElement()->GetText());
+						if (strcmp(iNode3->Value(), "Name") == 0) // Assign name
+						{
+							
+							iss >> sData;
+							Temp.SetName(sData);
+						}
+						if (strcmp(iNode3->Value(), "OBJLocation") == 0) // Assign .obj file location
+						{
 
-			else if(data == "Tr") // Model needs to be translated
-			{
-				// Create the translator vector3f
-				iss >> data;
-				Temp.SetPosition(glm::vec3(stof(data), Temp.GetPosition().y, Temp.GetPosition().z));
+							iss >> sData;
+							Temp.SetFileLocation(sData);
+						}
+						if (strcmp(iNode3->Value(), "TexLocation") == 0) // Assign .bmp texture file location
+						{
+							iss >> sData;
+							m_textureID.resize(m_textureID.size() + 1); // Make the textureID vector 1 bigger
+																		// Set texture to end of vector
+							tl->LoadBMP(sData, m_textureID[m_textureID.size() - 1], true);
+							Temp.SetTexture(m_textureID[m_textureID.size() - 1]);
+						}
+						if (strcmp(iNode3->Value(), "Translation") == 0) // Read in 3 values for the position of the model
+						{
+							glm::vec3 Position;
+							iss >> sData;
+							Position.x = stof(sData);
+							iss >> sData;
+							Position.y = stof(sData);
+							iss >> sData;
+							Position.z = stof(sData);
+							Temp.SetPosition(Position);
+						}
+						if (strcmp(iNode3->Value(), "Rotation") == 0) // Read in 3 values for the rotation of the model
+						{
+							
+							glm::vec3 Rotation;
+							iss >> sData;
+							Rotation.x = stof(sData);
+							iss >> sData;
+							Rotation.y = stof(sData);
+							iss >> sData;
+							Rotation.z = stof(sData);
+							Temp.SetRotation(Rotation);
+						}
+						if (strcmp(iNode3->Value(), "Scale") == 0) // Read in 3 values for the scale of the model
+						{
+							
+							glm::vec3 Scale;
+							iss >> sData;
+							Scale.x = stof(sData);
+							iss >> sData;
+							Scale.y = stof(sData);
+							iss >> sData;
+							Scale.z = stof(sData);
+							Temp.SetScale(Scale);
+						}
+						if (strcmp(iNode3->Value(), "Material") == 0) // Assign a material for the model
+						{
+							
+							iss >> sData;
+							Temp.SetMaterial(stoi(sData));
+						}
+						if (strcmp(iNode3->Value(), "Collectable") == 0) // Check if model is a collectable
+						{
 
-				iss >> data;
-				Temp.SetPosition(glm::vec3(Temp.GetPosition().x, stof(data), Temp.GetPosition().z));
-
-				iss >> data;
-				Temp.SetPosition(glm::vec3(Temp.GetPosition().x, Temp.GetPosition().y, stof(data)));
-			}
-
-			else if(data == "R") // Model needs to be rotated
-			{
-				// Create rotation vector3f
-				iss >> data;
-				Temp.SetRotation(glm::vec3(stof(data), Temp.GetRotation().y, Temp.GetRotation().z));
-
-				iss >> data;
-				Temp.SetRotation(glm::vec3(Temp.GetRotation().x, stof(data), Temp.GetRotation().z));
-
-				iss >> data;
-				Temp.SetRotation(glm::vec3(Temp.GetRotation().x, Temp.GetRotation().y, stof(data)));
-			}
-
-			else if(data == "S") // Model needs to be scaled
-			{
-				// Create scale vector3f
-				iss >> data;
-				Temp.SetScale(glm::vec3(stof(data), Temp.GetScale().y, Temp.GetScale().z));
-
-				iss >> data;
-				Temp.SetScale(glm::vec3(Temp.GetScale().x, stof(data), Temp.GetScale().z));
-
-				iss >> data;
-				Temp.SetScale(glm::vec3(Temp.GetScale().x, Temp.GetScale().y, stof(data)));
-			}
-
-			else if (data == "M") // Assign material to model
-			{
-				iss >> data;
-				Temp.SetMaterial(stof(data));
-			}
-
-			else if (data == "C") // Assign material to model
-			{
-				Temp.SetCollectable();
+							iss >> sData;
+							if (sData == "true")
+							{
+								Temp.SetCollectable();
+							}
+						}
+					}
+					ModelList.push_back(Temp); // Push to vector of models 
+				}
 			}
 		}
-		ModelList.push_back(Temp); // Push back temp into list of models to be drawn
 	}
-	sceneFile.close(); // Close file when finished
 
 	for (int i = 0; i < ModelList.size(); i++)
 	{

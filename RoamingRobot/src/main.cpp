@@ -61,7 +61,8 @@ int main()
 
 	int iState = MENU;
 
-	unsigned int u_iCollectableCounter = 0;
+	unsigned int u_iCollectableCounter = 0; // Reset counter
+
 
 	while (window.isOpen()) // Window is open loop
 	{
@@ -74,6 +75,7 @@ int main()
 			{
 			case START_GAME:
 				iState = GAME;
+				g_Game->ReturnRobot()->ResetRotations();
 				g_SelectionMenu.ResetClick();
 				break;
 
@@ -259,12 +261,14 @@ int main()
 			// If player collects 3 collectables end level
 			if (g_Game->ReturnCollectableCount() >= 3)
 			{
+				//g_Game->ReturnRobot()->ToggleAllMovement();
 				iState = END_SCREEN; // Switch screen
 				g_Game->ResetCollectableCount(); // Reset collectable conter
 				g_HeadsUpDisplay.UpdateCollectableCount(g_Game->ReturnCollectableCount()); // Update HUD
 				u_iCollectableCounter = 0; // Reset local collectable count
 				g_Game->ResetCollected(); // Reset foreign collectable count
 				g_Game->ReturnRobot()->SetRobotPosition(glm::vec3(0, 0, 0)); // Reset Robots position to starting pos
+				
 			}
 
 			if (iState == END_SCREEN) // Draw End Screen content

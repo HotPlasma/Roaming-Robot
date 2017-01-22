@@ -17,6 +17,11 @@ Model::Model(string FileLocation, string TextureLocation, glm::vec3 Position, gl
 	ModelMaterial = MaterialID;
 }
 
+string Model::GetName()
+{
+	return sName;
+}
+
 string Model::GetFileLocation()
 {
 	return sFileName;
@@ -94,6 +99,11 @@ void Model::SetCollected(bool Collected)
 	m_bCollected = Collected;
 }
 
+void Model::SetName(string newName)
+{
+	sName = newName;
+}
+
 void Model::SetTexture(GLuint TextureID)
 {
 	m_textureID = TextureID;
@@ -157,9 +167,9 @@ void Model::DrawModel(bool drawWithNormals, bool drawWithTexture)
 	}
 
 
-	// draw the shape...
+	// Draw the shape
 	glDrawArrays(GL_TRIANGLES, 0, (unsigned int)vertices.size() / 3);
-	// deactivate vertex arrays after drawing
+	// Deactivate vertex arrays after drawing
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 	if (drawWithNormals)

@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////
+//
+// Roaming Robot - Created by Jegor Kharlamov
+// Created for Games Programming Year 3 Coursework at DMU - Games Programming Course
+//
+// This project is a collectathon made with personally developed game engine components
+//
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "stdafx.h"
@@ -9,6 +18,7 @@ using namespace std;
 class Model
 {
 private:
+	string sName; // A moniker for each model
 	string sFileName; // File location of the obj
 	string sTexture; // File location of the texture
 	int ModelMaterial; // Which material the model with have. Different integers are different materials.
@@ -25,6 +35,7 @@ private:
 public:
 	Model(); // Constructor
 	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3 Scale, int MaterialID); // Full constructor
+	string GetName(); // Returns moniker
 	string GetFileLocation(); // Returns location of obj
 	GLuint GetTextureLocation(); // Returns location of texture
 	glm::vec3 GetPosition(); // Returns rosition of model
@@ -36,6 +47,7 @@ public:
 
 	void SetCollectable();
 	void SetCollected(bool Collected); // Set collected or not collected for a collectable
+	void SetName(string newName);
 	void SetTexture(GLuint TextureID); // Set texture ID
 	void SetFileLocation(string NewLocation); // Set obj location
 	void SetTextureLocation(string NewLocation); // Set texture location

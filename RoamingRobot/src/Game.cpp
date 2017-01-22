@@ -31,7 +31,7 @@ Game::~Game()
 bool Game::Init()
 {	
 	m_theRobot = new Robot;
-	m_theScene = new Scene("assets/scenes/Room.cfg"); // Load in scene file
+	m_theScene = new Scene("assets/scenes/Room.xml"); // Load in scene file
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glEnable(GL_DEPTH_TEST);

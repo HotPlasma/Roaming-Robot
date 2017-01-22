@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding = "utf-8"?>
+
+<Scene>
+  <!--List of Objects to be loaded for the room-->
+  <Object>
+    <Name>Plane</Name>
+    <OBJLocation>assets/models/Ground.obj</OBJLocation>
+    <TexLocation>assets/textures/floor.bmp</TexLocation>
+    <Translation>0 -12 -40</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Box</Name>
+    <OBJLocation>assets/models/Crate.obj</OBJLocation>
+    <TexLocation>assets/textures/Crate.bmp</TexLocation>
+    <Translation>20 -12 15</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Box</Name>
+    <OBJLocation>assets/models/Crate.obj</OBJLocation>
+    <TexLocation>assets/textures/Crate.bmp</TexLocation>
+    <Translation>20 -12 15</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Table</Name>
+    <OBJLocation>assets/models/Table.obj</OBJLocation>
+    <TexLocation>assets/textures/Table.bmp</TexLocation>
+    <Translation>-20 -12 -40</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Bin</Name>
+    <OBJLocation>assets/models/bin.obj</OBJLocation>
+    <TexLocation>assets/textures/bin.bmp</TexLocation>
+    <Translation>-60 -12 -30</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Chest</Name>
+    <OBJLocation> assets/models/Chest.obj</OBJLocation>
+    <TexLocation>assets/textures/Chest.bmp</TexLocation>
+    <Translation>60 -12 -30</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>5 5 5</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Barrel</Name>
+    <OBJLocation>assets/models/Barrel.obj</OBJLocation>
+    <TexLocation>assets/textures/Barrel.bmp</TexLocation>
+    <Translation>10 -12 -80</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>-40 -10 23</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>40 -10 8</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+  
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>0 -10 -60</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+</Scene>

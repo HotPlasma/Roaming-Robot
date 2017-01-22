@@ -1,7 +1,15 @@
+////////////////////////////////////////////////////////////
+//
+// Roaming Robot - Created by Jegor Kharlamov
+// Created for Games Programming Year 3 Coursework at DMU - Games Programming Course
+//
+// This project is a collectathon made with personally developed game engine components
+//
+////////////////////////////////////////////////////////////
 #ifndef __ROBOT_H
 #define __ROBOT_H
 
-#include "../libraries/glm/glm/glm.hpp"
+#include <glm.hpp>
 
 // Constants for arm and leg movement states
 const char BACKWARD_STATE = 0;

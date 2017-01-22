@@ -8,9 +8,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
-#include "Game.h"
 
-// shader.h included these
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -18,19 +16,17 @@
 #include <fstream>
 #include <sstream>
 
-#include <SFML\glew.h>		// make 1.5 functions into function pointers - bind at runtime.
-#include <SFML\OpenGL.hpp>	// glew BEFORE opengl headers!!!!
+#include <SFML\glew.h>		
+#include <SFML\OpenGL.hpp>	
 #include <SFML\Graphics.hpp>
-// put these inside the SFML\include folder
+
+
 #include <SFML\wglext.h>
 #include <SFML\glext.h>
 #include <windows.h>
 
-//#include <gl/gl.h>
-//#include <gl/glu.h>
 
-
-#include "../libraries/glm/glm/glm.hpp"
+#include <glm.hpp>
 
 #include <algorithm>
 

@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////
+//
+// Roaming Robot - Created by Jegor Kharlamov
+// Created for Games Programming Year 3 Coursework at DMU - Games Programming Course
+//
+// This project is a collectathon made with personally developed game engine components
+//
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include <iostream>
@@ -7,10 +16,10 @@
 class HUD : public sf::Drawable
 {
 private:
-	// Buttons on menu screen
+	// Battery icon
 	sf::Sprite m_Battery;
 
-	// Font for menu screen
+	// Font
 	Font m_SpaceFont;
 
 	// Title text
