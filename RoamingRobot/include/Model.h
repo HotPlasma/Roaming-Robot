@@ -17,8 +17,8 @@ private:
 	glm::vec3 ModelRotation; // Rotation of Model
 	glm::vec3 ModelScale; // Scale of Model
 
-	bool m_bCollectable = false;
-	bool m_bCollected = false;
+	bool m_bCollectable = false; // is the model a collectable?
+	bool m_bCollected = false; // has the collectable been collected?
 
 	GLuint m_textureID; // ID of the texture
 	ModelReader* m_modelReader; // Model Reader for the render the model
@@ -30,12 +30,12 @@ public:
 	glm::vec3 GetPosition(); // Returns rosition of model
 	glm::vec3 GetRotation(); // Returns rotation of model
 	glm::vec3 GetScale(); // Returns scale of model
-	bool CheckIfCollectable();
-	bool GetCollected();
+	bool CheckIfCollectable(); // Check if a model is a collectable
+	bool GetCollected(); // Check if a collectable has been collected
 	int GetMaterial(); // Returns materialID
 
 	void SetCollectable();
-	void SetCollected();
+	void SetCollected(bool Collected); // Set collected or not collected for a collectable
 	void SetTexture(GLuint TextureID); // Set texture ID
 	void SetFileLocation(string NewLocation); // Set obj location
 	void SetTextureLocation(string NewLocation); // Set texture location

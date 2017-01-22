@@ -12,12 +12,15 @@
 
 Robot::Robot()
 {
+
+	// Set everything to default values
+
 	armAngles[LEFT] = 0.0;
 	armAngles[RIGHT] = 0.0;
 	legAngles[LEFT] = 0.0;
 	legAngles[RIGHT] = 0.0;
 
-	_fRotationAngle = 0;
+	m_fRotationAngle = 0;
 
 	armStates[LEFT] = FORWARD_STATE;
 	armStates[RIGHT] = BACKWARD_STATE;
@@ -25,8 +28,8 @@ Robot::Robot()
 	legStates[LEFT] = FORWARD_STATE;
 	legStates[RIGHT] = BACKWARD_STATE;
 
-	_fArmsRotation = 20;
-	_fLegRotation = 20;
+	m_fArmsRotation = 20;
+	m_fLegRotation = 20;
 	Moving = false;
 	ToggleAllMovement();
 }
@@ -125,82 +128,84 @@ void Robot::DrawFoot(float xPos, float yPos, float zPos)
 	glPopMatrix();
 }
 
-//float Robot::get_fRotationAngle()
-//{
-//	return _fRotationAngle;
-//}
 
 void Robot::ToggleArmsMovement()
 {
-	if (_fArmsRotation != 0)
+	// If animating stop and animating and vise-versa
+	if (m_fArmsRotation != 0)
 	{
-		_fArmsRotation = 0;
+		m_fArmsRotation = 0;
 	}
 	else
 	{
-		_fArmsRotation = 20;
+		m_fArmsRotation = 20;
 	}
 }
 
 void Robot::ToggleAllMovement()
 {
-	if (_fArmsRotation != 0)
+	// If animating stop and animating and vise-versa
+	if (m_fArmsRotation != 0)
 	{
-		_fArmsRotation = 0;
+		m_fArmsRotation = 0;
 	}
 	else
 	{
-		_fArmsRotation = 20;
+		m_fArmsRotation = 20;
 	}
 
-	if (_fLegRotation != 0)
+	if (m_fLegRotation != 0)
 	{
-		_fLegRotation = 0;
+		m_fLegRotation = 0;
 	}
 	else
 	{
-		_fLegRotation = 20;
+		m_fLegRotation = 20;
 	}
 }
 
-void Robot::MoveForward(float distance) // Allows movement robot
+void Robot::SetRobotPosition(glm::vec3 NewPosition)
 {
+	m_RobotPosition = NewPosition;
+}
+
+void Robot::ResetRotations()
+{
+	// Reset to default values
+	for (int i = 0;  i < 2; i++)
+	{
+		armAngles[i] = 0;
+		legAngles[i] = 0;
+	}
+}
+
+void Robot::Move(float distance) // Allows movement robot
+{
+	// Only animate if moving
 	if (Moving == false)
 	{
 		ToggleAllMovement();
 		Moving = true;
 	}
+	// Move him forwards
+	glm::vec3 forwardNormal = glm::vec3(cosf(glm::radians(m_fRotationAngle - 90)), 0, -sinf(glm::radians(m_fRotationAngle - 90))); // Normal discribing direction Robot is facing and direction of travel
 
-	glm::vec3 forwardNormal = glm::vec3(cosf(glm::radians(_fRotationAngle - 90)), 0, -sinf(glm::radians(_fRotationAngle - 90))); // Normal discribing direction Robot is facing and direction of travel
-
-	_RobotPosition.x -= distance * forwardNormal.x;
-	_RobotPosition.z -= distance * forwardNormal.z;
+	m_RobotPosition.x -= distance * forwardNormal.x;
+	m_RobotPosition.z -= distance * forwardNormal.z;
 
 }
 
-void Robot::SetMaterialDefault()
-{
-	GLfloat materialWhiteAmbient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
-	GLfloat materialWhiteDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	GLfloat materialWhiteSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };		// so keeps light colour
-	GLfloat materialWhiteShininess = 700.0f;
-	glShadeModel(GL_SMOOTH);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, materialWhiteAmbient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, materialWhiteDiffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, materialWhiteSpecular);
-	glMaterialf(GL_FRONT, GL_SHININESS, materialWhiteShininess);
-}
 
 glm::vec3 Robot::ReturnRobotPosition()
 {
-	return _RobotPosition;
+	return m_RobotPosition;
 }
 
 void Robot::DrawRobot(float xPos, float yPos, float zPos)
 {
 	glPushMatrix();	
-		glTranslatef(_RobotPosition.x, _RobotPosition.y, _RobotPosition.z);	// draw robot at desired coordinates
-		glRotatef(_fRotationAngle, false, true, false);
+		glTranslatef(m_RobotPosition.x, m_RobotPosition.y, m_RobotPosition.z);	// draw robot at desired coordinates
+		glRotatef(m_fRotationAngle, false, true, false);
 
 		// draw head and torso parts
 		DrawHead(1.0f, 2.0f, 0.0f);		
@@ -244,9 +249,9 @@ void Robot::Prepare(float dt)
 	{
 		// arms
 		if (armStates[side] == FORWARD_STATE)
-			armAngles[side] += _fArmsRotation * dt;
+			armAngles[side] += m_fArmsRotation * dt;
 		else
-			armAngles[side] -= _fArmsRotation * dt;
+			armAngles[side] -= m_fArmsRotation * dt;
 
 		// change state if exceeding angles
 		if (armAngles[side] >= 15.0f)
@@ -256,9 +261,9 @@ void Robot::Prepare(float dt)
 
 		// legs
 		if (legStates[side] == FORWARD_STATE)
-			legAngles[side] += _fLegRotation * dt;
+			legAngles[side] += m_fLegRotation * dt;
 		else
-			legAngles[side] -= _fLegRotation * dt;
+			legAngles[side] -= m_fLegRotation * dt;
 
 		// change state if exceeding angles
 		if (legAngles[side] >= 15.0f)

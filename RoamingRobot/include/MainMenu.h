@@ -16,7 +16,7 @@ class Menu : public sf::Drawable
 		Button m_ExitButton;
 
 		// Font for menu screen
-		Font SpaceFont;
+		Font m_SpaceFont;
 	
 		// Title text
 		Text m_Title;
@@ -33,4 +33,5 @@ public:
 	void draw(RenderTarget &target, RenderStates states) const;
 	int update(float fTimestep);
 	void Click();
+	void ResetClick();
 };

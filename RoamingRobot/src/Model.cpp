@@ -89,9 +89,9 @@ void Model::SetCollectable()
 	m_bCollectable = true;
 }
 
-void Model::SetCollected()
+void Model::SetCollected(bool Collected)
 {
-	m_bCollected = true;
+	m_bCollected = Collected;
 }
 
 void Model::SetTexture(GLuint TextureID)

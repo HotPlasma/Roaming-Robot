@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 #include <iostream>
 #include <stdafx.h>
 #include <TextureVault.h>
@@ -13,17 +11,17 @@ private:
 	sf::Sprite m_Battery;
 
 	// Font for menu screen
-	Font SpaceFont;
+	Font m_SpaceFont;
 
 	// Title text
-	Text BatteryCount;
-	Text ToastText;
+	Text m_BatteryCount;
+	Text m_ToastText;
 	
-	bool ToastVisible;
+	bool m_bToastVisible;
 
 	TextureVault m_TexLoader; // Holds textures for buttons
 
-	sf::Clock ToastTimer; // Keeps track of how long a message stays on screen
+	sf::Clock m_ToastTimer; // Keeps track of how long a message stays on screen
 
 public:
 	HUD(int WindowWidth, int WindowHeight); // Constructor

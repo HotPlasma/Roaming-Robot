@@ -27,14 +27,14 @@ Menu::Menu(int WindowWidth, int WindowHeight)
 
 
 	// Sets up font for heads up display
-	if (!SpaceFont.loadFromFile("assets\\Fonts\\spaceage.TTF"))
+	if (!m_SpaceFont.loadFromFile("assets\\Fonts\\spaceage.TTF"))
 	{
 		cout << "Error, Space Age font failed to load";
 	}
 
 	// Sets up game title on main menu
 
-	m_Title.setFont(SpaceFont);
+	m_Title.setFont(m_SpaceFont);
 	m_Title.setString("Roaming Robot");
 	m_Title.setCharacterSize(80);
 
@@ -78,18 +78,22 @@ int Menu::update(float fTimestep)
 	{
 		if (m_NewGameButton.isActive())
 		{
-			return 2;
+			return 1;
 		}
 		else if (m_ExitButton.isActive())
 		{
-			return 1;
+			return 0;
 		}
 		m_bClicked = false;
 	}
-	return 0;
 }
 
 void Menu::Click()
 {
 	m_bClicked = true;
 };
+
+void Menu::ResetClick()
+{
+	m_bClicked = false;
+}

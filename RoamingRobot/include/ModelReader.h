@@ -10,17 +10,17 @@ class ModelReader
 		
 		static const int forwardSlash = 0x2F; // Forward slash
 
-		// For storing read data from the obj file
+		// Store data from the OBJ files
 
-		vector<float> m_vertices;					// v
-		vector<float> m_vertexNormals;				// vn
-		vector<float> m_vertexTextureCoordinates;	// vt only U V
+		vector<float> m_vertices;					
+		vector<float> m_vertexNormals;				
+		vector<float> m_vertexTextureCoordinates;	
 
 		vector<unsigned int> m_faceVertexIndices;
 		vector<unsigned int> m_faceTextureIndices;
 		vector<unsigned int> m_faceNormalIndices;
 
-		string m_modelName;
+		string m_modelName; // Name of the model
 
 		vector<float> m_vertexTriplets;	
 		vector<float> m_vertexNormalTriplets; 

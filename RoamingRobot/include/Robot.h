@@ -3,56 +3,58 @@
 
 #include "../libraries/glm/glm/glm.hpp"
 
-// constants for arm and leg movement states
+// Constants for arm and leg movement states
 const char BACKWARD_STATE = 0;
 const char FORWARD_STATE  = 1;
 
-// index constants for accessing arm and leg array data
+// Index constants for accessing arm and leg array data
 const char LEFT  = 0;
 const char RIGHT = 1;
 
 class Robot
 {
 private:
+	// Body states
 	char legStates[2];	
 	char armStates[2];
 
 	float legAngles[2];
 	float armAngles[2];
 
-	float _fArmsRotation; // Speed at which robots arms animate
+	float m_fArmsRotation; // Speed at which robots arms animate
 
-	float _fLegRotation; // Speed at which robots legs animate
+	float m_fLegRotation; // Speed at which robots legs animate
 
 
 
-	// draws a unit cube
+	// Draws a unit cube
 	void DrawCube(float xPos, float yPos, float zPos);
 
-	// methods to draw the parts of the robot
+	// Methods to draw the parts of the robot
 	void DrawArm(float xPos, float yPos, float zPos);
 	void DrawHead(float xPos, float yPos, float zPos);
 	void DrawTorso(float xPos, float yPos, float zPos);
 	void DrawLeg(float xPos, float yPos, float zPos);
 	void DrawFoot(float xPos, float yPos, float zPos);
 	
-	glm::vec3 _RobotPosition; // Robots position in 3D space
+	glm::vec3 m_RobotPosition; // Robots position in 3D space
 	
 
 public:
 
 	Robot();
 	virtual ~Robot();
-	float _fRotationAngle; // Angle robot is facing
-	// draws the entire robot
+	float m_fRotationAngle; // Angle robot is facing
+	// Draws the entire robot
 	void DrawRobot(float xPos, float yPos, float zPos);
-	void MoveForward(float distance);
-	void SetMaterialDefault();
-	void ToggleArmsMovement();
-	void ToggleAllMovement();
+	void Move(float distance); // Allows movement of the robot 
+	void ToggleArmsMovement(); // Stops arms movement 
+	void ToggleAllMovement(); // Stops all movement
+	void SetRobotPosition(glm::vec3 NewPosition); // Change robots position
+	void ResetRotations(); // Resets all the rotations for the body parts
 	glm::vec3 ReturnRobotPosition();
 	bool Moving;
-	// updates the robot data
+	// Updates the robot data
 	void Prepare(float dt);
 };
 

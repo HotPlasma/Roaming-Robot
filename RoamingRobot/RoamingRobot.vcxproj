@@ -137,9 +137,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\HUD.cpp" />
     <ClCompile Include="src\Button.cpp" />
-    <ClCompile Include="src\CGfxOpenGL.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\EndScreen.cpp" />
+    <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelReader.cpp" />
@@ -152,18 +153,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h" />
-    <ClInclude Include="include\CGfxOpenGL.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\EndScreen.h" />
     <ClInclude Include="include\HUD.h" />
     <ClInclude Include="include\MainMenu.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelReader.h" />
-    <ClInclude Include="include\resource.h" />
     <ClInclude Include="include\Robot.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\TextureLoader.h" />
     <ClInclude Include="include\TextureVault.h" />
-    <ClInclude Include="include\timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\scenes\Room.txt" />

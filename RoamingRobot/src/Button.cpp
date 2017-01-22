@@ -50,7 +50,7 @@ void Button::CheckHover(sf::Vector2f MousePos)
 
 bool Button::isActive()
 {
-	return m_bActive;
+	return m_bActive; // Button is clicked
 }
 
 Button::~Button()

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
-#include "CGfxOpenGL.h"
+#include "Game.h"
 
 // shader.h included these
 #include <stdio.h>
