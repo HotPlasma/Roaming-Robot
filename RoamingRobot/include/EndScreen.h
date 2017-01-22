@@ -1,16 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <stdafx.h>
-#include <TextureVault.h>
+#include <Menu.h>
 
-class EndScreen : public sf::Drawable
+class EndScreen : public AbstractMenu
 {
-private:
-	// Buttons on menu screen
-	sf::Sprite m_Screen;
-
-	TextureVault m_TexLoader; // Holds textures for buttons
 
 public:
 	EndScreen(int WindowWidth, int WindowHeight); // Constructor

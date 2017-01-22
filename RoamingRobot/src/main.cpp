@@ -101,6 +101,7 @@ int main()
 			// If current state is in menu
 			if (iState == MENU)
 			{	
+				
 				// Take mouse coords reletive to window
 				if (event.type == sf::Event::MouseMoved)
 				{
@@ -119,7 +120,6 @@ int main()
 			// Events exclusive for game state
 			else if (iState == GAME)
 			{
-			
 				// Resizes/adjusts viewport when window resized for opengl 
 				if (event.type == sf::Event::Resized)
 				{

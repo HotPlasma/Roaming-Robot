@@ -1,5 +1,4 @@
 #include <MainMenu.h>
-#include <Button.h>
 
 Menu::Menu(int WindowWidth, int WindowHeight)
 {
@@ -27,14 +26,14 @@ Menu::Menu(int WindowWidth, int WindowHeight)
 
 
 	// Sets up font for heads up display
-	if (!m_SpaceFont.loadFromFile("assets\\Fonts\\spaceage.TTF"))
+	if (!m_Font.loadFromFile("assets\\Fonts\\spaceage.TTF"))
 	{
 		cout << "Error, Space Age font failed to load";
 	}
 
 	// Sets up game title on main menu
 
-	m_Title.setFont(m_SpaceFont);
+	m_Title.setFont(m_Font);
 	m_Title.setString("Roaming Robot");
 	m_Title.setCharacterSize(80);
 

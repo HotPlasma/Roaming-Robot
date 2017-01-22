@@ -9,11 +9,11 @@ EndScreen::EndScreen(int WindowWidth, int WindowHeight)
 	});
 
 	// Set up main menu background
-	m_Screen.setPosition(0, 0);
-	m_Screen.setTexture(*m_TexLoader.getTextureIterator(0));
+	m_Background.setPosition(0, 0);
+	m_Background.setTexture(*m_TexLoader.getTextureIterator(0));
 }
 
 void EndScreen::draw(RenderTarget & target, RenderStates states) const
 {
-	target.draw(m_Screen);
+	target.draw(m_Background);
 }
